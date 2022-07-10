@@ -6,6 +6,9 @@ sys.path.append("./lib/")
 from instruct import INSTRUCTION_FILE_PATH
 import crypto as crp
 import keygen as kgn
+import database as db
+
+import json
 
 # create a main menu contained in the innit
 class ServerControlShell:
@@ -23,7 +26,7 @@ class ServerControlShell:
                     option = int(input("> "))
                     print('\n')
 
-                    if option in range(1, 8):
+                    if option in range(1, 9):
                         break
                 except:
                     pass
@@ -80,13 +83,30 @@ class ServerControlShell:
                 self.write_instruction('REMOVE_USED_LICENCE_KEY%'+licence_key+'|'+checksum)
                 print()
 
+            elif option == 8:
+
+                # display database contents
+                db.LicenceDatabaseUtils.check_if_valid_and_fix_if_not()
+                file = open(db.DATABASE_FILE_PATH, 'r', encoding=crp.ENCODING_STANDARD)
+                data = json.loads(file.read(), strict=False)
+                
+                print("Active keys:")
+                for key in data['active_keys']:
+                    print(key['key'])
+
+                print("Used keys:")
+                for key in data['used_keys']:
+                    print(key['key'])
+
+                print("\n")
+
         self.goodbye()
     
     def initial_greeting(self):
         print("Welcome to the Server Control CLI\n\n\tHere you can interact with\n\tthe server by sending it\n\tinstructions.\n\n")
 
     def display_main_menu(self):
-        print("Main Menu:\n\t1: Quit Shell\n\t2: Terminate Server\n\t3: Generate Licence Key\n\t4: Add Active Licence Key\n\t5: Remove Active Licence Key\n\t6: Add Used Licence Key\n\t7: Remove Used Licence Key\n\nSelect an option...\n")
+        print("Main Menu:\n\t1: Quit Shell\n\t2: Terminate Server\n\t3: Generate Licence Key\n\t4: Add Active Licence Key\n\t5: Remove Active Licence Key\n\t6: Add Used Licence Key\n\t7: Remove Used Licence Key\n\t8: Display database contents\n\nSelect an option...\n")
 
     def goodbye(self):
         print("\n\nGoodbye!")
