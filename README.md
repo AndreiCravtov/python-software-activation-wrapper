@@ -2,7 +2,7 @@
 
 ## Learning summary
 
-While learning the C# programming language, I have produced a simple web scraper, that scours Wikipedia web pages, as one of my projects. This project scrapes the links from each page so it can continue crawling, and the content of each page. The content is used as material to determine the letter prevalence of the letters of the English alphabet. These prevalence statistics are then displayed as a bar chart to the user in the console.
+While learning the Python programming language, I have produced a software licencing wrapper that can wrap around any other Python software project. This wrapper will perform the designated software licencing algorithm when the main software is run, and then will hand the control back to the software once the software licencing wrapper is convinced that the software has been activated.
 
 * Python programming language: while working on this project, I have learned the syntax of Python. I also learned about useful Python features, such as first-class functions or passing by reference. I used these directly as a part of my solution design.
 
